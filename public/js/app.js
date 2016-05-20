@@ -24,8 +24,8 @@ socket.on('message', function (message) {
 //	jQuery('.messages').append('<p><strong>'+ momentTimestamp.local().format('h:mm a: ') +'</strong>' + message.text +'</p>');  // to go with the div class (use .) in html when msg comein
 //	Split the above line into 2 for readbility 
 
-	$message.append('<p><strong>' + message.name + ' ' + momentTimestamp.local().format('h:mm a:') + '</strong></p>');
-	$message.append('<p>' + message.text +'</p>');
+	$message.append('<p><strong>' + message.name + ' ' + momentTimestamp.local().format('h:mm a:') + '</strong></p>'); // append name & ts 
+	$message.append('<p>' + message.text +'</p>');				// second part append the message 
 });
 // socket.emit('message',
 //	text: 'Welcome to the chat application! - app.js'

@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">  <!-- no closing tag for meta - key/value pair -->
+		<title>Socket.io Basics</title>
+	</head>
+	<body>
+		<a href="/index.html">Change Settings></a>
+			<!-- New messages go into div -->
+		<div class="messages">							<!--add class attribute  -->
+			<!-- Messages end up here  -->
+			<p></p>
+		</div> 
+							<!-- dividual app  --> 
+			<form id="message-form">        <!-- in app.js ref as #message-form -->
+				<input type="text" name="message"/>
+				<input type="submit" />
+			</form>
+
+			<script src="/js/jquery-2.2.3.min.js"></script>
+			<script src="/js/socket.io-1.3.7.js"></script>
+			<script src="/js/moment.js"></script>
+			<script src="/js/QueryParams.js"></script>
+			<script src="/js/app.js"></script>
+
+	</body>
+</html>
+
+<!-- create a simple form with a button to send message 
+	pull the value of the message from input with javascript 
+	input attributes type, name
+	type set to sbumit = send form by clicking btn or hit enter
+	then add js necessary (in app.js) to capture the message and sent to server  
+-->
