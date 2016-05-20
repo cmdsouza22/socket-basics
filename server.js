@@ -14,7 +14,7 @@ io.on('connection', function (socket) {
 		console.log('Message received: '+ message.text); // confirm message 
 
 //broadcast.emit sends to everyone except sender  , io.emit sends to all incl. sender
-		socket.broadcast.emit('message', message);      
+		io.emit('message', message);      
 	});
 	socket.emit('message',{
 		text: 'Welcome to the chat application!'

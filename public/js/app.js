@@ -9,6 +9,8 @@ socket.on('message', function (message) {
 	console.log('New Message:');
 	console.log(message.text); 
 
+	jQuery('.messages').append('<p>' + message.text +'</p>');  // to go with the div class (use .) in html when msg comein
+
 // socket.emit('message',{
 //	text: 'Welcome to the chat application! - app.js'
 // });
