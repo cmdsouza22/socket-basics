@@ -1,22 +1,24 @@
 // all app js stored here 
 var  socket = io(); 
+
 socket.on('connect', function(){
 	console.log('Connected to socket.io server');
 });
 
+// when message comes in modify below with ts 
 
 socket.on('message', function (message) {
+	var momentTimestamp = moment.utc(message.timestamp);  //after parsed as utc 
 	console.log('New Message:');
 	console.log(message.text); 
 
-	jQuery('.messages').append('<p>' + message.text +'</p>');  // to go with the div class (use .) in html when msg comein
-
-// socket.emit('message',{
-//	text: 'Welcome to the chat application! - app.js'
-// });
-
+// then call moment timestamp cancatenate to message.text
+	jQuery('.messages').append('<p><strong>'+ momentTimestamp.local().format('h:mm a: ') +'</strong>' + message.text +'</p>');  // to go with the div class (use .) in html when msg comein
 
 });
+// socket.emit('message',
+//	text: 'Welcome to the chat application! - app.js'
+// });});
 // now ready to fill out code 
 
 // handles submitting of new message 

@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",
+    "moment": "^2.10.6",
+    "moments": "0.0.2",
     "socket.io": "^1.3.7"
   }
 }
