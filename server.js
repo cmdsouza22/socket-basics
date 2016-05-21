@@ -10,6 +10,32 @@ app.use(express.static(__dirname + '/public'));
 
 var clientInfo = {};  //set of key value pairs socket io auto generates with values that user joined roomid
 
+// Sends current users to provided socket 
+function sendCurrentUsers (socket) {   		//user socket id to find which room
+	var info = clientInfo[socket.id];
+	var users = [];    						// push elements as we find them 
+
+	if (typeof info === 'undefined') {		// if room exists 
+		return; 
+	}
+
+	Object.keys(clientInfo).forEach(function (socketId) {		//loop thru till find match room 
+		var userInfo = clientInfo[socketId];
+
+		if(info.room === userInfo.room) {		// compare  with users in room
+			users.push(userInfo.name);
+
+		}
+	});
+
+	socket.emit('message', {
+			name: 'System',
+			text: 'Current users: ' + users.join(', '), 		// takes every element, converts to string & pushes together
+			timestamp: moment().valueOf()
+	});
+
+}
+
 io.on('connection', function (socket) {
 	console.log('User connected via socket.io!');
 
@@ -46,10 +72,14 @@ io.on('connection', function (socket) {
 	socket.on('message', function (message) {  // listens for message 
 		console.log('Message received: '+ message.text); // confirm message 
 
+		if (message.text === '@currentUsers') {
+			sendCurrentUsers(socket);
+		} else {
 //broadcast.emit sends to everyone except sender  , io.emit sends to all incl. sender
 	// timestamp property = Javascript timestamp (milliseconds)
-		message.timestamp = moment().valueOf();  // individual msg
-		io.to(clientInfo[socket.id].room).emit('message', message);   // only broadcasts to users in same room      
+			message.timestamp = moment().valueOf();  // individual msg
+			io.to(clientInfo[socket.id].room).emit('message', message);   // only broadcasts to users in same room      
+		}
 	});
 
 
