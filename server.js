@@ -13,6 +13,22 @@ var clientInfo = {};  //set of key value pairs socket io auto generates with val
 io.on('connection', function (socket) {
 	console.log('User connected via socket.io!');
 
+	socket.on('disconnect', function () {    //disconnect built in socket.io
+		// check if data for this user?
+		var userData = clientInfo[socket.id];
+
+		if (typeof userData !== 'undefined') {   // if exists 
+			socket.leave(userData.room);   	//user disconnected
+			io.to(userData.room).emit('message', {     //pass in room name + emit message event
+				name: 'System',
+				text: userData.name + ' has left',
+				timestamp: moment().valueOf()
+			});
+		// delet client data 
+		 	delete clientInfo[socket.id];
+		}
+	}); 
+
 //adding code for joining rooms
 	socket.on('joinRoom', function (req) {
 		clientInfo[socket.id]= req;  // use [] to pass in the variable
