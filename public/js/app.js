@@ -21,7 +21,8 @@ socket.on('connect', function(){    //when client successfully connects to serve
 
 socket.on('message', function (message) {
 	var momentTimestamp = moment.utc(message.timestamp);  //after parsed as utc 
-	var $message = jQuery('.messages');      // to split it for multiple references
+	var $messages = jQuery('.messages');      // to split it for multiple references
+	var $message = jQuery('<li class="list-group-item"></li>');   //create new element by specifying html 
 
 	console.log('New Message:');
 	console.log(message.text); 
@@ -33,6 +34,8 @@ socket.on('message', function (message) {
 
 	$message.append('<p><strong>' + message.name + ' ' + momentTimestamp.local().format('h:mm a:') + '</strong></p>'); // append name & ts 
 	$message.append('<p>' + message.text +'</p>');				// second part append the message 
+	$messages.append($message);      // append new element to the actual website making it visible to user 
+
 });
 // socket.emit('message',
 //	text: 'Welcome to the chat application! - app.js'

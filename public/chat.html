@@ -3,23 +3,46 @@
 	<head>
 		<meta charset="UTF-8">  <!-- no closing tag for meta - key/value pair -->
 		<title>Socket.io Basics</title>
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
+		<link rel="stylesheet" href="./css/styles.css">
 	</head>
 	<body>
-		<a href="/index.html">Change Settings></a>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 well">
+
+					<a href="/index.html">Change Settings></a>
+
+					<h1 class="room-title"></h1><!-- Room name (use jquery to access this element and how to set text of h1 tag , room name as content of h1 tag)
+					Use the title in the selector to make sure we are using the right selector  --> 		
+						<!-- New messages go into div -->
+					<ul class="messages list group">							<!--add class attribute  -->
+						<!-- Messages end up here  -->
+						<p></p>
+					</ul> 
+										<!-- dividual app  --> 
+						<form id="message-form">        <!-- in app.js ref as #message-form -->
+							<div class="form-group">
+								<div class="input-group">
+									<span class="input-group-addon">
+										<i class="glyphicon glyphicon-comment"></i>
+									</span>
+									<input type="text" name="message" class="form-control"/>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<input type="submit" class="btn btn-default btn-block"/>
+
+							</div>
+							<input type="submit" />
+						</form>
+				</div>
+			</div>
+		</div>
 
 
-		<h1 class="room-title"></h1><!-- Room name (use jquery to access this element and how to set text of h1 tag , room name as content of h1 tag)
-		Use the title in the selector to make sure we are using the right selector  --> 		
-			<!-- New messages go into div -->
-		<div class="messages">							<!--add class attribute  -->
-			<!-- Messages end up here  -->
-			<p></p>
-		</div> 
-							<!-- dividual app  --> 
-			<form id="message-form">        <!-- in app.js ref as #message-form -->
-				<input type="text" name="message"/>
-				<input type="submit" />
-			</form>
 
 			<script src="/js/jquery-2.2.3.min.js"></script>
 			<script src="/js/socket.io-1.3.7.js"></script>
