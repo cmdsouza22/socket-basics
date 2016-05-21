@@ -1,14 +1,20 @@
 // all app js stored here 
 
 var  name = getQueryVariable('name') || 'Anonymous';
-var  room = getQueryVariable('room');
+var  room = getQueryVariable('room');  // take the value and put itinto the href atags in chat.htmls
 var  socket = io(); 
 
 console.log(name + ' ' + 'wants to join ' + room); // currently manually entering into url then refresh 
+// update h1 tag room-title
+jQuery('.room-title').text(room);
 
-
-socket.on('connect', function(){
+socket.on('connect', function(){    //when client successfully connects to server
 	console.log('Connected to socket.io server');
+	socket.emit('joinRoom', {
+		name: name,
+		room: room
+	});
+
 });
 
 // when message comes in modify below with ts 
@@ -19,6 +25,7 @@ socket.on('message', function (message) {
 
 	console.log('New Message:');
 	console.log(message.text); 
+
 
 // then call moment timestamp cancatenate to message.text
 //	jQuery('.messages').append('<p><strong>'+ momentTimestamp.local().format('h:mm a: ') +'</strong>' + message.text +'</p>');  // to go with the div class (use .) in html when msg comein
@@ -55,6 +62,8 @@ $form.on('submit', function (event){
 	//$form.find('input{name=message') 		// do the find 
 	$message.val('');						// send empty string to clear msg
 	// erase the message after its sent  - access jQuery via find to find same one and select it 
+
+
 
 });
 
